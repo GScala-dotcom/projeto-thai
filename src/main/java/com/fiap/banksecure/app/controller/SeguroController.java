@@ -20,7 +20,7 @@ public class TipoSeguroController {
 
     @PostMapping("/criar")
     @ResponseStatus(HttpStatus.CREATED)
-    public TipoSeguroCreateResponseDTO cadastrarSeguro(@RequestBody TipoSeguroCreateRequestDTO seguroDto) {
+    public TipoSeguroCreateResponseDTO cadastrarSeguro(@RequestBody TipoSeguroCreateRequestDTO seguroDto) throws Exception{
         return tipoSeguroService.doCadastrar(seguroDto);
     }
 

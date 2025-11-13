@@ -9,13 +9,22 @@ import com.fiap.banksecure.app.repository.TipoSeguroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 public class TipoSeguroService {
 
     @Autowired
     private TipoSeguroRepository tipoSeguroRepository;
 
-    public TipoSeguroCreateResponseDTO doCadastrar(TipoSeguroCreateRequestDTO tipoSeguroDto) {
+    public TipoSeguroCreateResponseDTO doCadastrar(TipoSeguroCreateRequestDTO tipoSeguroDto) throws Exception {
+
+        if(tipoSeguroDto.titulo() == null || tipoSeguroDto.titulo().isBlank()) {
+            throw new IllegalArgumentException("Titulo nao pode ser vazio!");
+        } else if (tipoSeguroDto.valorPremioBase() == null || tipoSeguroDto.valorPremioBase().compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("Valor Premio Base nao pode ser vazio ou menor que 1!");
+        }
+
         TipoSeguro tipoSeguro = new TipoSeguro();
         tipoSeguro.setTitulo(tipoSeguroDto.titulo());
         tipoSeguro.setCoberturaMinima(tipoSeguroDto.coberturaMinima());
