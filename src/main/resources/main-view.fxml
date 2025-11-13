@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fiap.banksecure.ui.controllers.MainController">
+
+    <!-- TOPO: título e usuário logado -->
+    <top>
+        <VBox spacing="4" style="-fx-background-color: #0b1925; -fx-padding: 12;">
+           <children>
+               <Label style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="BankSecure - Gestão de Seguros" />
+   
+               <HBox spacing="10">
+      <children>
+                      <Label style="-fx-text-fill: #b0c4de; -fx-font-size: 12px;" text="Painel de Apólices" />
+      
+                      <Pane HBox.hgrow="ALWAYS" />
+                      <Label fx:id="lblUsuario" style="-fx-text-fill: #b0c4de; -fx-font-size: 12px;" text="Usuário: admin" />
+      </children>
+               </HBox>
+           </children>
+        </VBox>
+    </top>
+
+    <!-- CENTRO: filtros + tabela -->
+    <center>
+        <VBox spacing="8" style="-fx-padding: 12;">
+           <children>
+               <!-- Filtros -->
+               <HBox spacing="8">
+                  <children>
+                      <TextField fx:id="txtBuscaNumero" promptText="Buscar por nº apólice" HBox.hgrow="ALWAYS" />
+      
+                      <TextField fx:id="txtBuscaCliente" promptText="Buscar por cliente" HBox.hgrow="ALWAYS" />
+      
+                      <ComboBox fx:id="cbStatus" prefWidth="160">
+                          <items>
+                              <FXCollections fx:factory="observableArrayList">
+                                  <String fx:value="Todos" />
+                                  <String fx:value="Ativa" />
+                                  <String fx:value="Pendente" />
+                                  <String fx:value="Cancelada" />
+                                  <String fx:value="Sinistrada" />
+                              </FXCollections>
+                          </items>
+                          <promptText>Status</promptText>
+                      </ComboBox>
+      
+                      <Button fx:id="btnFiltrar" text="Filtrar" />
+                      <Button fx:id="btnLimparFiltros" text="Limpar" />
+                  </children>
+               </HBox>
+   
+               <!-- Tabela de apólices -->
+               <TableView fx:id="tblApolices" VBox.vgrow="ALWAYS">
+                   <columns>
+                       <TableColumn fx:id="colNumero" prefWidth="110" text="Nº Apólice" />
+                       <TableColumn fx:id="colCliente" prefWidth="180" text="Cliente" />
+                       <TableColumn fx:id="colTipo" prefWidth="130" text="Tipo" />
+                       <TableColumn fx:id="colProduto" prefWidth="140" text="Produto" />
+                       <TableColumn fx:id="colVigencia" prefWidth="150" text="Vigência" />
+                       <TableColumn fx:id="colPremio" prefWidth="110" text="Prêmio (R$)" />
+                       <TableColumn fx:id="colStatus" prefWidth="100" text="Status" />
+                   </columns>
+               </TableView>
+           </children>
+        </VBox>
+    </center>
+
+    <!-- BASE: botões principais -->
+    <bottom>
+        <HBox spacing="8" style="-fx-padding: 10; -fx-background-color: #f5f5f5;">
+           <children>
+               <Button fx:id="btnNovaApolice" style="-fx-font-weight: bold;" text="Nova Apólice" />
+               <Button fx:id="btnRegistrarSinistro" text="Registrar Sinistro" />
+               <Button fx:id="btnDetalhes" text="Ver Detalhes" />
+   
+               <Pane HBox.hgrow="ALWAYS" />
+   
+               <Button fx:id="btnSair" text="Sair" />
+           </children>
+        </HBox>
+    </bottom>
+
+</BorderPane>
