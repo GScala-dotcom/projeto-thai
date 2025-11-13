@@ -4,6 +4,7 @@ import com.fiap.banksecure.app.domain.dto.SeguroCreateRequestDTO;
 import com.fiap.banksecure.app.domain.dto.SeguroCreateResponseDTO;
 import com.fiap.banksecure.app.domain.dto.SeguroPutRequestDTO;
 import com.fiap.banksecure.app.domain.dto.SeguroPutResponseDTO;
+import com.fiap.banksecure.app.service.SeguroDaoService;
 import com.fiap.banksecure.app.service.SeguroService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,13 @@ public class SeguroController {
     }
 
     @PutMapping("/alterar/{id}")
-    public SeguroPutResponseDTO alterarSeguro(@PathVariable Long id, @RequestBody SeguroPutRequestDTO seguroDto) {
+    public SeguroPutResponseDTO alterarSeguro(@PathVariable Long id, @RequestBody SeguroPutRequestDTO seguroDto) throws Exception {
         return seguroService.doAlterar(id, seguroDto);
     }
 
     @DeleteMapping("/excluir/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void excluirSeguro(@PathVariable Long id) {
+    public void excluirSeguro(@PathVariable Long id) throws Exception {
         seguroService.doExcluir(id);
     }
 }
