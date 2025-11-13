@@ -50,7 +50,10 @@ public class TipoSeguroService {
         );
     }
 
-    public void doExcluir() {
+    public void doExcluir(Long id) {
+        TipoSeguro tipoSeguro = tipoSeguroRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Nao foi possivel localizar tipo de seguro com id " + id));
 
+        tipoSeguroRepository.delete(tipoSeguro);
     }
 }

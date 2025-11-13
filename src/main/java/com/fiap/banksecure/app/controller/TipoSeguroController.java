@@ -30,7 +30,8 @@ public class TipoSeguroController {
     }
 
     @DeleteMapping("/excluir/{id}")
-    public void excluirSeguro() {
-        tipoSeguroService.doExcluir();
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void excluirSeguro(@PathVariable Long id) {
+        tipoSeguroService.doExcluir(id);
     }
 }
