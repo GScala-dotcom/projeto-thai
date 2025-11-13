@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import java.math.BigDecimal;
 
 @Entity
-public class TipoSeguro {
+public class Seguro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,10 +20,10 @@ public class TipoSeguro {
 
     private BigDecimal valorPremioBase;
 
-    public TipoSeguro() {
+    public Seguro() {
     }
 
-    public TipoSeguro(Long id, String titulo, String coberturaMinima, BigDecimal valorPremioBase) {
+    public Seguro(Long id, String titulo, String coberturaMinima, BigDecimal valorPremioBase) {
         this.id = id;
         this.titulo = titulo;
         this.coberturaMinima = coberturaMinima;

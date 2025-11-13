@@ -1,23 +1,23 @@
 package com.fiap.banksecure.app.service;
 
-import com.fiap.banksecure.app.domain.dto.TipoSeguroCreateRequestDTO;
-import com.fiap.banksecure.app.domain.dto.TipoSeguroCreateResponseDTO;
-import com.fiap.banksecure.app.domain.dto.TipoSeguroPutRequestDTO;
-import com.fiap.banksecure.app.domain.dto.TipoSeguroPutResponseDTO;
-import com.fiap.banksecure.app.domain.model.TipoSeguro;
-import com.fiap.banksecure.app.repository.TipoSeguroRepository;
+import com.fiap.banksecure.app.domain.dto.SeguroCreateRequestDTO;
+import com.fiap.banksecure.app.domain.dto.SeguroCreateResponseDTO;
+import com.fiap.banksecure.app.domain.dto.SeguroPutRequestDTO;
+import com.fiap.banksecure.app.domain.dto.SeguroPutResponseDTO;
+import com.fiap.banksecure.app.domain.model.Seguro;
+import com.fiap.banksecure.app.repository.SeguroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
 @Service
-public class TipoSeguroService {
+public class SeguroService {
 
     @Autowired
-    private TipoSeguroRepository tipoSeguroRepository;
+    private SeguroRepository seguroRepository;
 
-    public TipoSeguroCreateResponseDTO doCadastrar(TipoSeguroCreateRequestDTO tipoSeguroDto) throws Exception {
+    public SeguroCreateResponseDTO doCadastrar(SeguroCreateRequestDTO tipoSeguroDto) throws Exception {
 
         if(tipoSeguroDto.titulo() == null || tipoSeguroDto.titulo().isBlank()) {
             throw new IllegalArgumentException("Titulo nao pode ser vazio!");
@@ -25,14 +25,14 @@ public class TipoSeguroService {
             throw new IllegalArgumentException("Valor Premio Base nao pode ser vazio ou menor que 1!");
         }
 
-        TipoSeguro tipoSeguro = new TipoSeguro();
-        tipoSeguro.setTitulo(tipoSeguroDto.titulo());
-        tipoSeguro.setCoberturaMinima(tipoSeguroDto.coberturaMinima());
-        tipoSeguro.setValorPremioBase(tipoSeguroDto.valorPremioBase());
+        Seguro seguro = new Seguro();
+        seguro.setTitulo(tipoSeguroDto.titulo());
+        seguro.setCoberturaMinima(tipoSeguroDto.coberturaMinima());
+        seguro.setValorPremioBase(tipoSeguroDto.valorPremioBase());
 
-        TipoSeguro salvo = tipoSeguroRepository.save(tipoSeguro);
+        Seguro salvo = seguroRepository.save(seguro);
 
-        return new TipoSeguroCreateResponseDTO(
+        return new SeguroCreateResponseDTO(
                 salvo.getId(),
                 salvo.getTitulo(),
                 salvo.getCoberturaMinima(),
@@ -40,18 +40,18 @@ public class TipoSeguroService {
         );
     }
 
-    public TipoSeguroPutResponseDTO doAlterar(Long id, TipoSeguroPutRequestDTO tipoSeguroDto) {
+    public SeguroPutResponseDTO doAlterar(Long id, SeguroPutRequestDTO tipoSeguroDto) {
 
-        TipoSeguro tipoSeguro = tipoSeguroRepository.findById(id)
+        Seguro seguro = seguroRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Nao foi possivel localizar tipo de seguro com id " + id));
 
-        tipoSeguro.setTitulo(tipoSeguroDto.titulo());
-        tipoSeguro.setCoberturaMinima(tipoSeguroDto.coberturaMinima());
-        tipoSeguro.setValorPremioBase(tipoSeguroDto.valorPremioBase());
+        seguro.setTitulo(tipoSeguroDto.titulo());
+        seguro.setCoberturaMinima(tipoSeguroDto.coberturaMinima());
+        seguro.setValorPremioBase(tipoSeguroDto.valorPremioBase());
 
-        TipoSeguro salvo = tipoSeguroRepository.save(tipoSeguro);
+        Seguro salvo = seguroRepository.save(seguro);
 
-        return new TipoSeguroPutResponseDTO(
+        return new SeguroPutResponseDTO(
                 salvo.getId(),
                 salvo.getTitulo(),
                 salvo.getCoberturaMinima(),
@@ -60,9 +60,9 @@ public class TipoSeguroService {
     }
 
     public void doExcluir(Long id) {
-        TipoSeguro tipoSeguro = tipoSeguroRepository.findById(id)
+        Seguro seguro = seguroRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Nao foi possivel localizar tipo de seguro com id " + id));
 
-        tipoSeguroRepository.delete(tipoSeguro);
+        seguroRepository.delete(seguro);
     }
 }
